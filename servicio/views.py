@@ -124,6 +124,66 @@ def d_cliente(request, id):
 
 
 
+
+# ******************************************************************
+# CRUD de Mantenimiento
+# ******************************************************************
+
+def c_mantenimiento(request):
+    if request.method == "POST":
+        mantenimientoform=MantenimientoForm(request.POST)
+        if mantenimientoform.is_valid():
+            mantenimientoform.save()
+            return redirect('r_mantenimiento')
+        else:
+            mantenimientoform = MantenimientoForm()
+    else:
+        mantenimientoform = MantenimientoForm()
+
+    return render(request,"mantenimiento/c_mantenimiento.html",{'mantenimientoform':mantenimientoform})
+
+
+def r_mantenimiento(request):
+    mantenimiento = Mantenimiento.objects.all()
+    return render(request,"mantenimiento/r_mantenimiento.html",{'mantenimientos_ls':mantenimiento})
+
+
+
+def u_mantenimiento(request,id):
+    if request.method =="POST":
+        mantenimiento = get_object_or_404(Mantenimiento, pk=id)
+        mantenimientoForm =MantenimientoForm(request.POST or None, instance=mantenimiento)
+        if mantenimientoForm.is_valid():
+            mantenimientoForm.save()
+            return redirect('r_mantenimiento')
+        else:
+            mantenimientoForm = MantenimientoForm(instance=mantenimiento)
+    else: #Get
+        mantenimiento = get_object_or_404(Mantenimiento, pk=id)
+        mantenimientoForm =MantenimientoForm(request.POST or None, instance=mantenimiento)
+    return render(request,"mantenimiento/u_mantenimiento.html",{'mantenimientoForm':mantenimientoForm})
+
+
+def d_mantenimiento(request, id):
+    if request.method =="POST":
+        mantenimiento = get_object_or_404(Mantenimiento,pk=id)
+        mantenimientoForm = MantenimientoForm(request.POST or None, instance= mantenimiento)
+        if mantenimientoForm.is_valid():
+            mantenimiento.estado = 0
+            mantenimiento.save()
+            return redirect('r_mantenimiento')
+    else: #get
+        mantenimiento = get_object_or_404(Mantenimiento, pk=id)
+        mantenimientoForm = MantenimientoForm(request.POST or None, instance=mantenimiento)
+
+    return render(request,"mantenimiento/d_mantenimiento.html",{'mantenimientoForm': mantenimientoForm})
+
+
+
+
+
+
+
 # ******************************************************************
 # CRUD de Nota Venta
 # ******************************************************************

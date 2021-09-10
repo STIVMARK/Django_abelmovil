@@ -70,10 +70,27 @@ class Nota_Venta(models.Model):
         return '{}{}{}'.format(self.Codigo," ",self.Cliente," ",self.Direccion)
 
 
+
+class Mantenimiento(models.Model):
+    Codigo = models.CharField(max_length=50, blank=False, null=False)
+    dispositivo = models.CharField(max_length=50, blank= False, null=False)
+    sistema_Operativo = models.CharField(max_length=50, blank= False, null=False)
+    descripcion = models.CharField(max_length=50, blank= False, null=False)
+    Precio = models.DecimalField(max_digits=5, decimal_places=2)
+
+    class Meta:
+        db_table="Mantenimiento"
+        verbose_name="Mantenimiento"
+        verbose_name_plural="Mantenimientos"
+
+    def __str__(self):
+        return '{}'.format(self.descripcion)
+
+
 class Detalle_Nota_Venta(models.Model):
     codigo = models.ForeignKey(Nota_Venta, on_delete=models.CASCADE)
     cantidad= models.IntegerField()
-    descripcion = models.CharField(max_length=50, blank= False, null=False)
+    mantenimiento = models.ForeignKey(Mantenimiento, on_delete=models.CASCADE)
     valor_Unitario = models.DecimalField(max_digits=5, decimal_places=2)
     valor_total = models.DecimalField(max_digits=5, decimal_places=2)
 
@@ -89,7 +106,7 @@ class Detalle_Nota_Venta(models.Model):
         verbose_name_plural="Detalle_Nota_Ventas"
 
     def __str__(self):
-        return '{}{}{}{}{}'.format(self.codigo," ", self.cantidad," ",self.descripcion," ",self.valor_Unitario," ",self.valor_total)
+        return '{}{}{}{}{}'.format(self.codigo," ", self.cantidad," ",self.mantenimiento," ",self.valor_Unitario," ",self.valor_total)
 
 
 class Factura(models.Model):

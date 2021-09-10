@@ -13,6 +13,13 @@ class ClienteForm(forms.ModelForm):
         model = Cliente
         fields= ['Nombre','Apellido','Cedula','edad','Direccion','mail']
 
+
+class MantenimientoForm(forms.ModelForm):
+    class Meta:
+        model = Mantenimiento
+        fields=['Codigo', 'dispositivo','sistema_Operativo','descripcion' ,'Precio']
+
+
 class NotaVentaForm(forms.ModelForm):
     class Meta:
         model  = Nota_Venta
@@ -24,7 +31,7 @@ class NotaVentaForm(forms.ModelForm):
 class DetalleVentaForm(forms.ModelForm):
     class Meta:
         model = Detalle_Nota_Venta
-        fields = ['codigo','cantidad','descripcion','valor_Unitario','valor_total']
+        fields = ['codigo','cantidad','mantenimiento','valor_Unitario','valor_total']
 
 class FacturaForm(forms.ModelForm):
     class Meta:

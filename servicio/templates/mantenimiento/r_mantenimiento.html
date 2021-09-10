@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block contenido %}
+
+
+
+    <center>
+     <h1> Listar Mantenimiento</h1>
+
+
+    <a href="{% url 'c_mantenimiento'%}"> Crear Mantenimiento</a>
+
+                    <table>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha modificacion</th>
+                    <th>Codigo</th>
+                    <th>Dispositivo</th>
+                    <th>sistema_Operativo</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+
+                    {% for i in mantenimientos_ls %}
+                        {% if i.estado == 1  %}
+                        <tr>
+                            <td>{{ i.fecha_creacion }}</td>
+                            <td>{{ i.fecha_actualizacion }}</td>
+                            <td>{{ i.Codigo }}</td>
+                            <td>{{ i.dispositivo }}</td>
+                            <td>{{ i.sistema_Operativo }}</td>
+                            <td>{{ i.descripcion }}</td>
+                            <td>{{ i.Precio }}</td>
+                            <td><a href="{% url 'u_mantenimiento' i.id%}"> ... </a> </td>
+                            <td><a href="{% url 'd_mantenimiento' i.id%}"> ... </a></td>
+
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+
+
+
+    </center>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
