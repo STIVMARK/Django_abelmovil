@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ nota_ventaform.as_p }}
+    <input type="submit" value="Eliminar Usuario">
+</form>
+
+
+
+{% endblock %}

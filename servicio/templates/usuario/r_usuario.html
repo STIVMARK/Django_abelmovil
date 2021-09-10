@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block contenido %}
+
+
+
+    <center>
+     <h1> Listar Usuarios</h1>
+
+
+    <a href="{% url 'c_usuario'%}"> Crear Usuario</a>
+
+                    <table>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha modificacion</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Cedula</th>
+                    <th>edad</th>
+                    <th>Direccion</th>
+                    <th>mail</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+
+                    {% for i in usuario_ls %}
+                        {% if i.estado == 1  %}
+                        <tr>
+                            <td>{{ i.fecha_creacion }}</td>
+                            <td>{{ i.fecha_actualizacion }}</td>
+                            <td>{{ i.Nombre }}</td>
+                            <td>{{ i.Apellido }}</td>
+                            <td>{{ i.Cedula }}</td>
+                            <td>{{ i.edad }}</td>
+                            <td>{{ i.Direccion }}</td>
+                            <td>{{ i.mail }}</td>
+                            <td><a href="{% url 'u_usuario' i.id%}"> ... </a> </td>
+                            <td><a href="{% url 'd_usuario' i.id%}"> ... </a></td>
+
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+
+
+
+    </center>
+
+
+
+{% endblock %}

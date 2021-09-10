@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block contenido %}
+
+
+
+    <center>
+     <h1> Listar Facturas</h1>
+
+
+    <a href="{% url 'c_factura'%}"> Crear Factura</a>
+
+                    <table>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha modificacion</th>
+                    <th>Encabezado</th>
+                    <th>Detalle</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+
+                    {% for i in factura_ls %}
+                        {% if i.estado == 1  %}
+                        <tr>
+                            <td>{{ i.fecha_creacion }}</td>
+                            <td>{{ i.fecha_actualizacion }}</td>
+                            <td>{{ i.encabezado }}</td>
+                            <td>{{ i.detalle }}</td>
+                            <td><a href="{% url 'u_factura' i.id%}"> ... </a> </td>
+                            <td><a href="{% url 'd_factura' i.id%}"> ... </a></td>
+
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+
+
+
+    </center>
+
+
+
+{% endblock %}

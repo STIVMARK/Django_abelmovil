@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block contenido %}
+
+
+
+    <center>
+     <h1> Listar Detalle_venta</h1>
+
+
+    <a href="{% url 'c_detalle_nota_venta'%}"> Crear detalle_venta</a>
+
+                    <table>
+                    <th>Fecha Creacion</th>
+                    <th>Fecha modificacion</th>
+                    <th>codigo</th>
+                    <th>cantidad</th>
+                    <th>descripcion</th>
+                    <th>valor_Unitario</th>
+                    <th>valor_total</th>
+                    <th>Modificar</th>
+                    <th>Eliminar</th>
+
+                    {% for i in detalle_venta_ls %}
+                        {% if i.estado == 1  %}
+                        <tr>
+                            <td>{{ i.fecha_creacion }}</td>
+                            <td>{{ i.fecha_actualizacion }}</td>
+                            <td>{{ i.codigo }}</td>
+                            <td>{{ i.cantidad }}</td>
+                            <td>{{ i.descripcion }}</td>
+                            <td>{{ i.valor_Unitario }}</td>
+                            <td>{{ i.valor_total }}</td>
+                            <td><a href="{% url 'u_detalle_nota_venta' i.id%}"> ... </a> </td>
+                            <td><a href="{% url 'd_detalle_nota_venta' i.id%}"> ... </a></td>
+
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+
+
+
+    </center>
+
+
+
+{% endblock %}
